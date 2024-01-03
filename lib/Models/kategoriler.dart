@@ -11,6 +11,9 @@ class Kategoriler {
     Kategori("MEYVE", 0.0, 0, 10),
     Kategori("ESYA", 0.0, 0, 10),
   ];
+  /*List<Kelime> kelimeListesi = [
+    Kelime("kopek","dog",true),
+  ];*/
 
   static Future<void> kategoriDoldur() async {
     List<String> dosyadanOkunan = await DosyaIslem.readFromFile();
@@ -31,6 +34,7 @@ class Kategoriler {
         var yeniKelime = Kelime(liste[0], liste[1], bool.parse(liste[2]));
         if (bool.parse(liste[2])) kategori.ogrenilenKelime++;
         kategori.kelimeListesi.add(yeniKelime);
+        print(yeniKelime.turkce);
       }
     }
   }

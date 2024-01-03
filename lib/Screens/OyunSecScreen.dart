@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:word_wizard/Screens/KelimeBilgisiScreen.dart';
+=======
+import 'package:word_wizard/Screens/KelimeOgren.dart';
+>>>>>>> 5c7f6b47ec8646e2a8d321b7a4b028d8bb6192e3
 import 'package:word_wizard/Screens/KelimeSecScreen.dart';
+import 'package:word_wizard/Screens/my_home_page.dart';
 
 class OyunSecScreen extends StatelessWidget {
   int secilenKategoriIndex = 0;
@@ -81,7 +86,8 @@ class OyunSecScreen extends StatelessWidget {
                   height: 180,
                   child: ElevatedButton(
                     onPressed: () {
-                      // navigate to kelime eslestir screen
+                      Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => MyHomePage(secilenKategoriIndex,)),);
                     },
                     child: const Text(
                       'Kelime Eşleştir',
@@ -117,8 +123,9 @@ class OyunSecScreen extends StatelessWidget {
               height: 180,
               child: ElevatedButton(
                 onPressed: () {
-                  // navigate to resim sec screen
-                },
+                  Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => InputPage(secilenKategoriIndex,)),);
+                    },
                 child: const Text(
                   'Resim Seç',
                   textAlign: TextAlign.center,
