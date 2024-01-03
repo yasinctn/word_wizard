@@ -11,7 +11,7 @@ class Kategori {
 
   double progressHesapla() {
     double progress = 0.0;
-    for (var oyun in this.oyunlar) {
+    for (var oyun in oyunlar) {
       if (oyun) {
         progress += 0.2;
       }

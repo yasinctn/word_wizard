@@ -1,23 +1,25 @@
 import 'package:word_wizard/list_item.dart';
+import 'package:word_wizard/Models/kategoriler.dart';
+import 'package:word_wizard/Models/kelime.dart';
 
 class KelimeListesi{
-  static Map<String,String> liste={
-    "football":"futbol",
-    "basketball":"basketbol",
-    "volleyball":"voleybol",
-    "tennis":"tenis",
-    "boxing":"boks",
-    "archery":"okçuluk",
-    "weighlifting":"halter",
-    "wrestling":"güreş",
-    "handball":"hentbol",
-    "javelin throw":"cirit atma",
-  };
+  static Map<String,String> liste={};
 
   static List<String> turkceler=[];
   static List<String> ingilizceler=[];
   static List<ListItem>turkcelerItems=[];
   static List<ListItem>ingilizcelerItems=[];
+
+  static void mapOlustur(int kategoriIndex)
+  {
+    Map<String,String> yeniMap={};
+    List<Kelime> gelenKelimeler=Kategoriler.kategoriler[kategoriIndex].kelimeListesi;
+    for(int i=0;i<10;i++)
+    {
+      yeniMap[gelenKelimeler[i].ingilizce]=gelenKelimeler[i].turkce;
+    }
+    liste=yeniMap;
+  }
 
   static void turkcelerOlustur()
   {

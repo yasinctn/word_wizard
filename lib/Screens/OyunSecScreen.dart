@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Screens/KelimeOgren.dart';
 import 'package:word_wizard/Screens/KelimeSecScreen.dart';
+import 'package:word_wizard/Screens/my_home_page.dart';
 
 class OyunSecScreen extends StatelessWidget {
   int secilenKategoriIndex = 0;
@@ -76,7 +77,8 @@ class OyunSecScreen extends StatelessWidget {
                   height: 180,
                   child: ElevatedButton(
                     onPressed: () {
-                      // navigate to kelime eslestir screen
+                      Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => MyHomePage(secilenKategoriIndex,)),);
                     },
                     child: const Text(
                       'Kelime Eşleştir',
