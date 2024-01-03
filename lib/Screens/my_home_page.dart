@@ -9,8 +9,8 @@ import 'package:word_wizard/my_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   
-  int secilenIndex;
-  MyHomePage(this.secilenIndex);
+  final int secilenIndex;
+  const MyHomePage(this.secilenIndex, {super.key});
 
 
   @override
