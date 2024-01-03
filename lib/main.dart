@@ -17,8 +17,8 @@ class MainApp extends StatelessWidget {
         appBar: AppBar(title: Center(child: Text("Word Wizard"))),
         body: sayfalar[0],
         bottomNavigationBar: BottomNavigationBar(items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home),label: 'home'),
-          BottomNavigationBarItem(icon: Icon(Icons.rocket),label: 'Gozden Gecir'),
+          BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Ana Sayfa'),
+          BottomNavigationBarItem(icon: Icon(Icons.rocket),label: 'Gözden Geçir'),
           BottomNavigationBarItem(icon: Icon(Icons.settings),label: 'Ayarlar'),
         ]),
         )
