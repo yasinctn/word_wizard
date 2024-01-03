@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
 import 'package:word_wizard/Models/kelime.dart';
+import 'package:word_wizard/dosyaIslem.dart';
 
 class InputPage extends StatefulWidget {
   int gelenIndex;
@@ -162,6 +163,8 @@ class _InputPageState extends State<InputPage> {
                                 getcolor = newColor;
                                 if (count == dictinory.length) {
                                  // showDialogs();
+                                 Kategoriler.kategoriler[widget.gelenIndex].oyunlar[4]=true;
+                                 DosyaIslem.writeToFile();
                                  Navigator.pop(context);
                                 }
                               });
@@ -181,6 +184,8 @@ class _InputPageState extends State<InputPage> {
                                 getcolor2 = newColor;
                                 if (count == dictinory.length) {
                                   //showDialogs();
+                                  Kategoriler.kategoriler[widget.gelenIndex].oyunlar[4]=true;
+                                  DosyaIslem.writeToFile();
                                   Navigator.pop(context);
                                 }
                               });
@@ -214,6 +219,8 @@ class _InputPageState extends State<InputPage> {
                                 getcolor3 = newColor;
                                 if (count == dictinory.length) {
                                   //showDialogs();
+                                  Kategoriler.kategoriler[widget.gelenIndex].oyunlar[4]=true;
+                                  DosyaIslem.writeToFile();
                                   Navigator.pop(context);
                                 }
                               });
@@ -233,6 +240,8 @@ class _InputPageState extends State<InputPage> {
                                 getcolor4 = newColor;
                                 if (count == dictinory.length) {
                                   //showDialogs();
+                                  Kategoriler.kategoriler[widget.gelenIndex].oyunlar[4]=true;
+                                  DosyaIslem.writeToFile();
                                   Navigator.pop(context);
                                 }
                               });
