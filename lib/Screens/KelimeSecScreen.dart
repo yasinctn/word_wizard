@@ -49,7 +49,7 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
     index += 1;
     correctWord = generateRandomWord();
     if (correctWord != null) {
-      imagePath = "assets/images/${correctWord!.ingilizce}.jpeg";
+      imagePath = "assets/images/${correctWord!.ingilizce}.jpg";
       options = [correctWord!, generateUncorrectWord(correctWord!)];
       var newQuestion = Question(word: correctWord, options: options);
       seenWords.add(newQuestion);
@@ -64,7 +64,7 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
       index += 1;
       setState(() {
         correctWord = seenWords[index].word;
-        imagePath = "assets/images/${correctWord!.ingilizce}.jpeg";
+        imagePath = "assets/images/${correctWord!.ingilizce}.jpg";
         options = seenWords[index].options;
       });
     } else {
@@ -79,7 +79,7 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
       index -= 1;
       setState(() {
         correctWord = seenWords[index].word;
-        imagePath = "assets/images/${correctWord!.ingilizce}.jpeg";
+        imagePath = "assets/images/${correctWord!.ingilizce}.jpg";
         options = seenWords[index].options;
       });
     } else {
