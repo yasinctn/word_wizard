@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:word_wizard/Screens/KelimeOgren.dart';
 import 'package:word_wizard/Screens/KelimeSecScreen.dart';
 
 class OyunSecScreen extends StatelessWidget {
@@ -111,8 +112,9 @@ class OyunSecScreen extends StatelessWidget {
               height: 180,
               child: ElevatedButton(
                 onPressed: () {
-                  // navigate to resim sec screen
-                },
+                  Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => InputPage(secilenKategoriIndex,)),);
+                    },
                 child: const Text(
                   'Resim Seç',
                   textAlign: TextAlign.center,
