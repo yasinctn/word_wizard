@@ -4,7 +4,7 @@ aslan-lion-false
 tavşan-rabbit-false
 fil-elephant-false
 timsah-alligator-false
-zebra-zebra-false
+zebra-Zebra-false
 inek-cow-false
 kaplumbağa-turtle-true
 köpek balığı-shark-false

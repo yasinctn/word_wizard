@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
+import 'package:word_wizard/dosyaIslem.dart';
 import 'package:word_wizard/index_text_bilgisi.dart';
 import 'package:word_wizard/kelime_listesi.dart';
 import 'package:word_wizard/my_widget.dart';
@@ -35,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
       indicatorValue=indicatorValue+0.1;
       if(indicatorValue>=0.99)
       {
+        DosyaIslem.writeToFile();
         Kategoriler.kategoriler[widget.secilenIndex].oyunlar[2]=true;
         KelimeListesi.liste={};
         Navigator.pop(context);
