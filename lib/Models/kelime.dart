@@ -1,18 +1,19 @@
-class Kelime{
+class Kelime {
   String turkce;
   String ingilizce;
   bool ogrenildi;
-  Kelime(this.turkce,this.ingilizce,this.ogrenildi);
-  Map<String,dynamic> toMap(){
+  Kelime(this.turkce, this.ingilizce, this.ogrenildi);
+
+  Map<String, dynamic> toMap() {
     return {
       "turkce": turkce,
       "ingilizce": ingilizce,
-      "ogrenildi":ogrenildi,
-      
+      "ogrenildi": ogrenildi,
     };
   }
-  Kelime.fromMap(Map<String,dynamic> map)
-  : turkce = map["turkce"],
-    ingilizce = map["ingilizce"],
-    ogrenildi = map["ogrenildi"];
+
+  Kelime.fromMap(Map<String, dynamic> map)
+      : turkce = map["turkce"],
+        ingilizce = map["ingilizce"],
+        ogrenildi = map["ogrenildi"];
 }

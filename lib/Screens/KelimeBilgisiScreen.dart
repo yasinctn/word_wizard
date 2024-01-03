@@ -21,6 +21,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
   bool isPressed = false;
   bool isAnimating = false;
   String imagePath = "";
+  String voicePath = "";
   int currentAracIndex = 0;
   double _initial = 0.1;
   // ignore: unused_element
@@ -51,7 +52,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
 
   /*
   void playSound() {
-    audioPlayer.play(, isLocal: false);
+    audioPlayer.play("assets/audio/${Kategoriler.kategoriler[currentAracIndex]}.jpeg",isLocal: false);
   }
   */
   @override

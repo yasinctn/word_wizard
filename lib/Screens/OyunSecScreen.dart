@@ -36,7 +36,8 @@ class OyunSecScreen extends StatelessWidget {
                       navigateTo(
                         context,
                         KelimeBilgisi(
-                            secilenKategoriIndex: secilenKategoriIndex),
+                            secilenKategoriIndex: secilenKategoriIndex
+                            ),
                       );
                     },
                     child: const Text(
