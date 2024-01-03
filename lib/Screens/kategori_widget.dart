@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
+import 'package:word_wizard/Screens/OyunSecScreen.dart';
 
 class KategoriWidget extends StatefulWidget {
   @override
@@ -43,7 +44,11 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                     EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
                 child: ElevatedButton(
                   onPressed: () {
-                    kategoriGuncelle();
+                    if (Kategoriler.kategoriler[index].oyunlar[0])
+                      OyunSecScreen(secilenKategoriIndex: index);
+                    else {
+                      //Kelime bilgisi widgeti cagrılacak
+                    }
                   },
                   child: ListTile(
                     title: Container(
