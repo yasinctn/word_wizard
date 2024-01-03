@@ -34,7 +34,9 @@ class _InputPageState extends State<InputPage> {
   void showDialogs() {
     Widget okButton = TextButton(
       child: Text("Çıkış"),
-      onPressed: () {},
+      onPressed: () {
+       // Navigator.pop(context);
+      },
     );
 
     AlertDialog alert = AlertDialog(
@@ -159,7 +161,8 @@ class _InputPageState extends State<InputPage> {
                               setState(() {
                                 getcolor = newColor;
                                 if (count == dictinory.length) {
-                                  showDialogs();
+                                 // showDialogs();
+                                 Navigator.pop(context);
                                 }
                               });
                             }),
@@ -177,7 +180,8 @@ class _InputPageState extends State<InputPage> {
                               setState(() {
                                 getcolor2 = newColor;
                                 if (count == dictinory.length) {
-                                  showDialogs();
+                                  //showDialogs();
+                                  Navigator.pop(context);
                                 }
                               });
                             }),
@@ -209,7 +213,8 @@ class _InputPageState extends State<InputPage> {
                               setState(() {
                                 getcolor3 = newColor;
                                 if (count == dictinory.length) {
-                                  showDialogs();
+                                  //showDialogs();
+                                  Navigator.pop(context);
                                 }
                               });
                             }),
@@ -227,7 +232,8 @@ class _InputPageState extends State<InputPage> {
                               setState(() {
                                 getcolor4 = newColor;
                                 if (count == dictinory.length) {
-                                  showDialogs();
+                                  //showDialogs();
+                                  Navigator.pop(context);
                                 }
                               });
                             }),
