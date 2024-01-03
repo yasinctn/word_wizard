@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:word_wizard/Screens/KelimeBilgisiScreen.dart';
-=======
 import 'package:word_wizard/Screens/KelimeOgren.dart';
->>>>>>> 5c7f6b47ec8646e2a8d321b7a4b028d8bb6192e3
 import 'package:word_wizard/Screens/KelimeSecScreen.dart';
 import 'package:word_wizard/Screens/my_home_page.dart';
 
