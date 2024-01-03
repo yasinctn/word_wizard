@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:word_wizard/Models/kelime.dart';
 import 'package:word_wizard/kelime_listesi.dart';
 
 class ListItem
