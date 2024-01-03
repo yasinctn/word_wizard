@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:word_wizard/Screens/KelimeBilgisiScreen.dart';
 import 'package:word_wizard/Screens/KelimeSecScreen.dart';
 
 class OyunSecScreen extends StatelessWidget {
@@ -32,7 +33,11 @@ class OyunSecScreen extends StatelessWidget {
                   height: 180,
                   child: ElevatedButton(
                     onPressed: () {
-                      // navigate to kelime bilgisi screen
+                      navigateTo(
+                        context,
+                        KelimeBilgisi(
+                            secilenKategoriIndex: secilenKategoriIndex),
+                      );
                     },
                     child: const Text(
                       'Kelime Bilgisi',
