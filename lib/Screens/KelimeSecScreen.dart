@@ -14,7 +14,7 @@ final class KelimeSecScreen extends StatefulWidget {
 final class KelimeSecScreenState extends State<KelimeSecScreen> {
 // DEĞİŞKENLER
 
-  List<Kelime> words = Kategoriler.kategoriler[2].kelimeListesi;
+  List<Kelime> words = [];
   List<Question> seenWords = [];
   double progress = 0.0;
   bool isCorrect = false;
@@ -24,6 +24,10 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
   Color buttonColor1 = Colors.blue;
   Color buttonColor2 = Colors.blue;
   int index = 0;
+
+  void getWords() {
+    words = Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi;
+  }
 
 // RASTGELE KELİME ALMA METHODU
   Kelime? generateRandomWord() {
@@ -39,7 +43,8 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
 // YANLIŞ SEÇENEKLERİ OLUŞTURMA FONKSİYONU
   Kelime generateUncorrectWord(Kelime correctAnsver) {
     List<Kelime> otherWords = List.from(
-      Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi)..remove(correctAnsver);
+        Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi)
+      ..remove(correctAnsver);
     return otherWords[Random().nextInt(otherWords.length)];
   }
 
@@ -98,6 +103,7 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
   @override
   void initState() {
     super.initState();
+    getWords();
     generateQuestion();
   }
 
