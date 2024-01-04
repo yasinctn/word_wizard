@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
@@ -16,8 +17,6 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
 
   List<Kelime> words = [];
   List<Question> seenWords = [];
-  double progress = 0.0;
-  bool isCorrect = false;
   Kelime? correctWord;
   List<Kelime> options = [];
   String imagePath = "";
@@ -29,7 +28,7 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
     words = Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi;
   }
 
-// RASTGELE KELİME ALMA METHODU
+// RASTGELE KELİME ALMA FONKSİYONU
   Kelime? generateRandomWord() {
     if (words.isNotEmpty) {
       Kelime generatedAnsver = words[Random().nextInt(words.length)];
@@ -63,7 +62,8 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
     options.shuffle();
   }
 
-  void nextWord() {
+// SONRAKİ SORUYA GEÇME
+  void nextQuestion() {
     if (index + 1 < seenWords.length) {
       index += 1;
       setState(() {
@@ -78,7 +78,8 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
     }
   }
 
-  void prevWord() {
+// ÖNCEKİ SORUYA DÖNME
+  void prevQuestion() {
     if (index > 0) {
       index -= 1;
       setState(() {
@@ -98,6 +99,49 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
     } else {
       return false;
     }
+  }
+
+// RESET FONKSİYONU
+  void resetGame() {
+    getWords();
+    seenWords = [];
+    index = 0;
+    nextQuestion();
+  }
+
+// ALERT FONKSİYONU
+
+  showAlertDialog(BuildContext context) {
+    Widget cancelButton = TextButton(
+      child: Text("Bitir"),
+      onPressed: () {
+        Navigator.pop(context);
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text("Tekrar Oyna"),
+      onPressed: () {
+        resetGame();
+        Navigator.pop(context);
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Tebrikler"),
+      content: Text("Tüm kelimeleri tamamladınız"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   @override
@@ -127,9 +171,11 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: LinearProgressIndicator(
+                minHeight: 10,
+                borderRadius: BorderRadius.circular(12),
                 backgroundColor: Colors.grey,
                 valueColor: const AlwaysStoppedAnimation(Colors.blue),
-                value: (index + 1) / 10,
+                value: (index) / 10,
               ),
             ),
 
@@ -141,21 +187,45 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
                 const Spacer(),
 // GERİ
                 IconButton(
-                  onPressed: (() => prevWord()),
+                  onPressed: (() => prevQuestion()),
                   icon: const Icon(Icons.arrow_back_ios),
                   style: const ButtonStyle(
                     alignment: Alignment.centerLeft,
                   ),
                 ),
 // RESİM
-                Image(
-                  image: AssetImage(imagePath),
+                Container(
                   width: 250,
                   height: 250,
+                  margin: const EdgeInsets.only(
+                      bottom: 50, left: 15, right: 15, top: 23),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(1.0),
+                    borderRadius: BorderRadius.circular(30),
+                    image: DecorationImage(
+                      image: AssetImage(imagePath),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color.fromARGB(201, 134, 137, 125)
+                            .withOpacity(0.3),
+                        spreadRadius: 4,
+                        blurRadius: 2,
+                        offset: const Offset(0, 0),
+                      ),
+                    ],
+                  ),
                 ),
+
 // İLERİ
                 IconButton(
-                  onPressed: (() => nextWord()),
+                  onPressed: () {
+                    if (seenWords.length == 10) {
+                      showAlertDialog(context);
+                    } else {
+                      nextQuestion();
+                    }
+                  },
                   icon: const Icon(Icons.arrow_forward_ios),
                   style: const ButtonStyle(
                     alignment: Alignment.centerRight,
@@ -166,7 +236,9 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
             ),
             const SizedBox(height: 20),
 // SEÇENEKLER
+
             // 1. SEÇENEK BUTONU
+
             const Spacer(),
             SizedBox(
               width: 200,
@@ -175,7 +247,13 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
                 style: ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(buttonColor1),
                 ),
-                child: Text(options.first.ingilizce),
+                child: Text(
+                  options.first.ingilizce,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 22,
+                  ),
+                ),
                 onPressed: () {
                   if (checkAnswer(options.first)) {
                     setState(() {
@@ -185,7 +263,10 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
                         () {
                           setState(() {
                             buttonColor1 = Colors.blue;
-                            nextWord();
+                            if (seenWords.length == 10) {
+                              showAlertDialog(context);
+                            }
+                            nextQuestion();
                           });
                         },
                       );
@@ -215,7 +296,13 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(buttonColor2),
                   ),
-                  child: Text(options.last.ingilizce),
+                  child: Text(
+                    options.last.ingilizce,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 22,
+                    ),
+                  ),
                   onPressed: () {
                     if (checkAnswer(options.last)) {
                       setState(() {
@@ -225,7 +312,10 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
                           () {
                             setState(() {
                               buttonColor2 = Colors.blue;
-                              nextWord();
+                              if (seenWords.length == 10) {
+                                showAlertDialog(context);
+                              }
+                              nextQuestion();
                             });
                           },
                         );
@@ -253,65 +343,9 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
   }
 }
 
-// KELİME MODELİ
-/*
-class Kelime {
-  String ing;
-  String tr;
-  String imagePath;
-
-  Kelime({required this.ing, required this.tr, required this.imagePath});
-}
-*/
 class Question {
   Kelime? word;
   List<Kelime> options;
 
   Question({required this.word, required this.options});
-}
-
-/*
-// MEYVELER LİSTESİ
-class Fruits {
-  static List<Kelime> fruits = [
-    Kelime(ing: "Apple", tr: "Elma", imagePath: "assets/apple.jpg"),
-    Kelime(ing: "Banana", tr: "Muz", imagePath: "assets/banana.jpg"),
-    Kelime(ing: "Cherry", tr: "Kiraz", imagePath: "assets/cherry.jpg"),
-    Kelime(ing: "Grape", tr: "Üzüm", imagePath: "assets/grape.jpg"),
-    Kelime(ing: "Orange", tr: "Portakal", imagePath: "assets/orange.jpg"),
-    Kelime(ing: "Pineapple", tr: "Ananas", imagePath: "assets/pineapple.jpg"),
-    Kelime(ing: "Strawberry", tr: "Çilek", imagePath: "assets/strawberry.jpg"),
-    Kelime(ing: "Watermelon", tr: "Karpuz", imagePath: "assets/watermelon.jpg"),
-    Kelime(
-        ing: "Tangerine", tr: "Mandalina", imagePath: "assets/tangerine.jpg"),
-    Kelime(
-        ing: "Blackberry", tr: "Böğürtlen", imagePath: "assets/blackberry.jpg")
-  ];
-}
-*/
-showAlertDialog(BuildContext context) {
-  Widget cancelButton = TextButton(
-    child: Text("Bitir"),
-    onPressed: () {},
-  );
-  Widget continueButton = TextButton(
-    child: Text("Tekrar Oyna"),
-    onPressed: () {},
-  );
-
-  AlertDialog alert = AlertDialog(
-    title: Text("Tebrikler"),
-    content: Text("Tüm kelimeleri tamamladınız"),
-    actions: [
-      cancelButton,
-      continueButton,
-    ],
-  );
-
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
 }
