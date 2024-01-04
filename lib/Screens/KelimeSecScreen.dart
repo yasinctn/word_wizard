@@ -112,15 +112,21 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
 // ALERT FONKSİYONU
 
   showAlertDialog(BuildContext context) {
-    Widget cancelButton = TextButton(
-      child: Text("Bitir"),
+    Widget cancelButton = FilledButton(
+      child: const Text(
+        "Bitir",
+        style: TextStyle(fontSize: 19),
+      ),
       onPressed: () {
         Navigator.pop(context);
         Navigator.pop(context);
       },
     );
-    Widget continueButton = TextButton(
-      child: Text("Tekrar Oyna"),
+    Widget continueButton = FilledButton(
+      child: const Text(
+        "Tekrar Oyna",
+        style: TextStyle(fontSize: 19),
+      ),
       onPressed: () {
         resetGame();
         Navigator.pop(context);
@@ -128,8 +134,15 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
     );
 
     AlertDialog alert = AlertDialog(
-      title: Text("Tebrikler"),
-      content: Text("Tüm kelimeleri tamamladınız"),
+      title: const Text(
+        textAlign: TextAlign.center,
+        "Tebrikler",
+        style: TextStyle(fontSize: 22),
+      ),
+      content: const Text(
+        textAlign: TextAlign.center,
+        "Tüm kelimeleri tamamladınız. Tekrar oynamak ister misiniz",
+      ),
       actions: [
         cancelButton,
         continueButton,
