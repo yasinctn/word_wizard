@@ -53,9 +53,9 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
   }
 
   void playSound() {
-    voicePath =
-        "assets/audio/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3";
-    audioPlayer.play(voicePath as Source);
+    audioPlayer.play(
+        "assets/audio/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3"
+            as Source);
   }
 
   @override
@@ -80,7 +80,9 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
         Row(
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: const Icon(
                 Icons.arrow_back_ios_sharp,
                 color: Colors.blueAccent,
@@ -168,6 +170,9 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                     engindex += 1;
                     voiceindex += 1;
                     imageindex += 1;
+                    if (imageindex== 10) {
+                      Navigator.pop(context);
+                    }
                   });
                 },
                 icon: const Icon(

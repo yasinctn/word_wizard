@@ -3,6 +3,7 @@ import 'package:word_wizard/Screens/KelimeBilgisiScreen.dart';
 import 'package:word_wizard/Screens/KelimeOgren.dart';
 import 'package:word_wizard/Screens/KelimeSecScreen.dart';
 import 'package:word_wizard/Screens/my_home_page.dart';
+import 'package:word_wizard/Screens/kelimeYaz.dart';
 
 class OyunSecScreen extends StatelessWidget {
   int secilenKategoriIndex = 0;
@@ -35,12 +36,8 @@ class OyunSecScreen extends StatelessWidget {
                   height: 180,
                   child: ElevatedButton(
                     onPressed: () {
-                      navigateTo(
-                        context,
-                        KelimeBilgisi(
-                            secilenKategoriIndex: secilenKategoriIndex
-                            ),
-                      );
+                      Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => KelimeBilgisi(secilenKategoriIndex:secilenKategoriIndex,)),);
                     },
                     child: const Text(
                       'Kelime Bilgisi',
@@ -101,7 +98,8 @@ class OyunSecScreen extends StatelessWidget {
                   height: 180.0,
                   child: ElevatedButton(
                     onPressed: () {
-                      // navigate to kelime yaz screen
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => Project1(KategoriIndex:secilenKategoriIndex,)),);
                     },
                     child: const Text(
                       'Kelime Yaz',
