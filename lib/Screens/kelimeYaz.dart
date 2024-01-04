@@ -91,19 +91,20 @@ void checkIt() {
 
       
       Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex].correction = 2;
-    } else {
-      scoreKeeper.add(
+    } 
+else {
+scoreKeeper.add(
         const Icon(Icons.check, color: Color.fromARGB(255, 255, 255, 255)),
       );
 
       colour = Color.fromARGB(255, 47, 106, 49).withGreen(220);
       correctAnswers++;
       ColourBorder = Colors.green;
+  isButtonActive = true;
+  Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex].correction = 1;
 
-      Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex].correction = 1;
-    }
-
-    isButtonActive = true;
+}
+    
   });
 }
 
