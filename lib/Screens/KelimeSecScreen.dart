@@ -39,7 +39,8 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
 // YANLIŞ SEÇENEKLERİ OLUŞTURMA FONKSİYONU
   Kelime generateUncorrectWord(Kelime correctAnsver) {
     List<Kelime> otherWords = List.from(
-      Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi)..remove(correctAnsver);
+        Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi)
+      ..remove(correctAnsver);
     return otherWords[Random().nextInt(otherWords.length)];
   }
 
