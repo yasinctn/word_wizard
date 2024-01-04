@@ -170,7 +170,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                     engindex += 1;
                     voiceindex += 1;
                     imageindex += 1;
-                    if (imageindex== 10) {
+                    if (currentIndex == 10) {
                       Navigator.pop(context);
                     }
                   });
