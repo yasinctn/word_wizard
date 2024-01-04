@@ -3,10 +3,11 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
 import 'package:word_wizard/Models/kelime.dart';
+import 'package:word_wizard/dosyaIslem.dart';
 
 class KelimeBilgisi extends StatefulWidget {
   int secilenKategoriIndex = 0;
-  KelimeBilgisi({super.key, required this.secilenKategoriIndex});
+  KelimeBilgisi({required this.secilenKategoriIndex, super.key});
 
   @override
   State<KelimeBilgisi> createState() => stateKelimeBilgisi();
@@ -15,14 +16,17 @@ class KelimeBilgisi extends StatefulWidget {
 // ignore: camel_case_types
 class stateKelimeBilgisi extends State<KelimeBilgisi> {
   bool isFirst = true;
-  int secilenKategoriIndex = 0;
   stateKelimeBilgisi();
   AudioPlayer audioPlayer = AudioPlayer();
   bool isPressed = false;
   bool isAnimating = false;
   String imagePath = "";
   String voicePath = "";
-  int currentAracIndex = 0;
+  int currentIndex = 0;
+  int trindex = 0;
+  int engindex = 0;
+  int voiceindex = 0;
+  int imageindex = 0;
   double _initial = 0.1;
   // ignore: unused_element
 
@@ -37,26 +41,26 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
   }
 
   String fillListtr() {
-    List<Kelime> words =
-        List.from(Kategoriler.kategoriler[secilenKategoriIndex].kelimeListesi);
-    String a = words[currentAracIndex].turkce;
-    return a;
+    String words = Kategoriler.kategoriler[widget.secilenKategoriIndex]
+        .kelimeListesi[engindex].ingilizce;
+    return words;
   }
 
   String fillListeng() {
-    List<Kelime> words =
-        List.from(Kategoriler.kategoriler[secilenKategoriIndex].kelimeListesi);
-    String a = words[currentAracIndex].ingilizce;
-    return a;
+    String words = Kategoriler
+        .kategoriler[widget.secilenKategoriIndex].kelimeListesi[trindex].turkce;
+    return words;
   }
 
-  /*
   void playSound() {
-    audioPlayer.play("assets/audio/${Kategoriler.kategoriler[currentAracIndex]}.jpeg",isLocal: false);
+    voicePath =
+        "assets/audio/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3";
+    audioPlayer.play(voicePath as Source);
   }
-  */
+
   @override
   Widget build(BuildContext context) {
+    /*
     if (isFirst) {
       fillListtr();
       isFirst = false;
@@ -67,6 +71,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
     }
     fillListeng();
     fillListtr();
+    */
     return SafeArea(
         child: Scaffold(
             //backgroundColor: Colors.blueGrey,
@@ -105,14 +110,17 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
           children: [
             Expanded(
               child: Visibility(
-                visible:
-                    currentAracIndex != 0, // Eğer index 0 değilse görünür yap
+                visible: currentIndex != 0, // Eğer index 0 değilse görünür yap
                 child: IconButton(
                   onPressed: () {
                     setState(() {
-                      if (currentAracIndex != 0) {
+                      if (currentIndex != 0) {
                         _initial -= 0.1;
-                        currentAracIndex = (currentAracIndex - 1);
+                        currentIndex = (currentIndex - 1);
+                        trindex -= 1;
+                        engindex -= 1;
+                        voiceindex -= 1;
+                        imageindex -= 1;
                       } else {}
                     });
                   },
@@ -136,7 +144,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                   borderRadius: BorderRadius.circular(30),
                   image: DecorationImage(
                       image: AssetImage(imagePath =
-                          "assets/images/${Kategoriler.kategoriler[currentAracIndex]}.jpg")),
+                          "assets/images/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[imageindex].ingilizce}.jpg")),
                   boxShadow: [
                     BoxShadow(
                       color: const Color.fromARGB(201, 134, 137, 125)
@@ -155,7 +163,11 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                 onPressed: () {
                   setState(() {
                     _initial += 0.1;
-                    currentAracIndex = (currentAracIndex + 1);
+                    currentIndex = (currentIndex + 1);
+                    trindex += 1;
+                    engindex += 1;
+                    voiceindex += 1;
+                    imageindex += 1;
                   });
                 },
                 icon: const Icon(
@@ -236,7 +248,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                     icon: const Icon(Icons.mic),
                     color: Colors.white,
                     onPressed: () {
-                      //playSound();
+                      playSound();
                       setState(() {
                         isPressed = !isPressed;
                         Timer(const Duration(seconds: 2), () {
