@@ -3,7 +3,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
 import 'package:word_wizard/Models/kelime.dart';
-import 'package:word_wizard/dosyaIslem.dart';
 
 class KelimeBilgisi extends StatefulWidget {
   int secilenKategoriIndex = 0;
@@ -164,13 +163,14 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                 padding: const EdgeInsets.only(left: 0),
                 onPressed: () {
                   setState(() {
-                    _initial += 0.1;
-                    currentIndex = (currentIndex + 1);
-                    trindex += 1;
-                    engindex += 1;
-                    voiceindex += 1;
-                    imageindex += 1;
-                    if (currentIndex == 10) {
+                     if (currentIndex < 9) {  // Değişiklik burada
+                      _initial += 0.1;
+                      currentIndex = (currentIndex + 1);
+                      trindex += 1;
+                      engindex += 1;
+                      voiceindex += 1;
+                      imageindex += 1;
+                    } else {
                       Navigator.pop(context);
                     }
                   });
