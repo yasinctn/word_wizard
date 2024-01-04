@@ -16,6 +16,17 @@ String imagePath = "";
 bool isButtonActive = true;
 
 class _Project1State extends State<Project1> {
+  Widget _stepIndicator() {
+    return (LinearProgressIndicator(
+      borderRadius: BorderRadius.circular(12.0),
+      backgroundColor: Colors.grey[350],
+      valueColor: const AlwaysStoppedAnimation(Colors.green),
+      minHeight: 10.0,
+      value: _initial,
+    ));
+  }
+
+  double _initial = 0.1;
   final _textController = TextEditingController();
 
   String userInput = '';
@@ -76,38 +87,36 @@ class _Project1State extends State<Project1> {
     }
   }
 
-void checkIt() {
-  setState(() {
-    String correct = returnEnglish();
-    if (userInput != correct) {
-      print('renk degisti');
-      scoreKeeper.add(
-        const Icon(Icons.close, color: Color.fromARGB(255, 255, 255, 255)),
-      );
+  void checkIt() {
+    setState(() {
+      String correct = returnEnglish();
+      if (userInput != correct) {
+        print('renk degisti');
+        scoreKeeper.add(
+          const Icon(Icons.close, color: Color.fromARGB(255, 255, 255, 255)),
+        );
 
-      colour = const Color.fromARGB(255, 198, 56, 45).withRed(170);
-      wrongAnswers++;
-      ColourBorder = Colors.red;
+        colour = const Color.fromARGB(255, 198, 56, 45).withRed(170);
+        wrongAnswers++;
+        ColourBorder = Colors.red;
 
-      
-      Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex].correction = 2;
-    } 
-else {
-scoreKeeper.add(
-        const Icon(Icons.check, color: Color.fromARGB(255, 255, 255, 255)),
-      );
+        Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex]
+            .correction = 2;
+      } else {
+        scoreKeeper.add(
+          const Icon(Icons.check, color: Color.fromARGB(255, 255, 255, 255)),
+        );
 
-      colour = Color.fromARGB(255, 47, 106, 49).withGreen(220);
-      correctAnswers++;
-      ColourBorder = Colors.green;
-  isButtonActive = true;
-  Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex].correction = 1;
-
-}
-    
-  });
-}
-
+        colour = Color.fromARGB(255, 47, 106, 49).withGreen(220);
+        correctAnswers++;
+        ColourBorder = Colors.green;
+        isButtonActive = true;
+        Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex]
+            .correction = 1;
+        _initial += 0.1;
+      }
+    });
+  }
 
   void lightColor() {
     if (Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex]
@@ -117,8 +126,8 @@ scoreKeeper.add(
       isButtonActive = false;
       textFieldActive = 1;
       ColourBorder = Color.fromARGB(255, 40, 185, 45);
-    } else if (Kategoriler
-            .kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex].correction ==
+    } else if (Kategoriler.kategoriler[widget.KategoriIndex]
+            .kelimeListesi[gezenIndex].correction ==
         2) {
       colour = const Color.fromARGB(255, 198, 56, 45).withRed(170);
       isButtonActive = false;
@@ -166,6 +175,8 @@ scoreKeeper.add(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              _stepIndicator(),
+              Expanded(child: SizedBox()),
               Expanded(
                 flex: 7,
                 child: Row(
