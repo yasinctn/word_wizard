@@ -96,11 +96,7 @@ packages:
       sha256: ee67cb0715911d28db6bf4af1026078bd6f0128b07a5f66fb2ed94ec6783c09a
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "1.17.2"
-=======
     version: "1.18.0"
->>>>>>> 5c7f6b47ec8646e2a8d321b7a4b028d8bb6192e3
   crypto:
     dependency: transitive
     description:
@@ -352,11 +348,7 @@ packages:
       sha256: "5c2f730018264d276c20e4f1503fd1308dfbbae39ec8ee63c5236311ac06954b"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "0.6.0"
-=======
     version: "0.6.1"
->>>>>>> 5c7f6b47ec8646e2a8d321b7a4b028d8bb6192e3
   typed_data:
     dependency: transitive
     description:
