@@ -52,9 +52,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
   }
 
   void playSound() {
-    audioPlayer.play(
-        "assets/audio/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3"
-            as Source);
+    audioPlayer.play(AssetSource("audio/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3"));
   }
 
   @override

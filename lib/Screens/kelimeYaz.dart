@@ -67,7 +67,7 @@ class _Project1State extends State<Project1> {
   void isVisible() {
     if (gezenIndex == 0) {
       forwardArrayColor = Colors.black;
-    } else if (gezenIndex == 10) {
+    } else if (gezenIndex == 9) {
       Navigator.pop(context);
     } else {
       backArrayColor = Colors.white.withOpacity(1);
@@ -118,7 +118,7 @@ scoreKeeper.add(
       textFieldActive = 1;
       ColourBorder = Color.fromARGB(255, 40, 185, 45);
     } else if (Kategoriler
-            .kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex] ==
+            .kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex].correction ==
         2) {
       colour = const Color.fromARGB(255, 198, 56, 45).withRed(170);
       isButtonActive = false;
