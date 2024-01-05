@@ -47,9 +47,10 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                   margin:
                       EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
                   child: ElevatedButton(
-                    onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(
+                    onPressed: () async{
+                        await Navigator.push(context, MaterialPageRoute(
                           builder: (context) => OyunSecScreen(secilenKategoriIndex: index,)),);
+                          kategoriGuncelle();
                     },
                     child: ListTile(
                       title: Container(
