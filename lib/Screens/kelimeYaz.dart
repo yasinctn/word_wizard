@@ -220,11 +220,11 @@ class _Project1State extends State<Project1> {
                         setState(() {
                           print('going forward');
                           goForward();
-                          isVisible();
                           returnEnglish();
                           returnTurkish();
-                          lightColor();
                           colour = Colors.white.withOpacity(0);
+                          lightColor();
+                          isVisible();
                         });
                       },
                       icon: const Icon(Icons.arrow_forward_ios),
