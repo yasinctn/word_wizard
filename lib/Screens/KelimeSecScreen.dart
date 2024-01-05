@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
 import 'package:word_wizard/Models/kelime.dart';
+import 'package:word_wizard/dosyaIslem.dart';
 
 final class KelimeSecScreen extends StatefulWidget {
   int secilenKategoriIndex = 0;
@@ -16,7 +17,7 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
 // DEĞİŞKENLER
 
   List<Kelime> words = [];
-  List<Question> seenWords = [];
+  List<Question> seenQuestions = [];
   Kelime? correctWord;
   List<Kelime> options = [];
   String imagePath = "";
@@ -55,7 +56,7 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
       imagePath = "assets/images/${correctWord!.ingilizce}.jpg";
       options = [correctWord!, generateUncorrectWord(correctWord!)];
       var newQuestion = Question(word: correctWord, options: options);
-      seenWords.add(newQuestion);
+      seenQuestions.add(newQuestion);
     } else {
       print("nul geldi");
     }
@@ -64,12 +65,12 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
 
 // SONRAKİ SORUYA GEÇME
   void nextQuestion() {
-    if (index + 1 < seenWords.length) {
+    if (index + 1 < seenQuestions.length) {
       index += 1;
       setState(() {
-        correctWord = seenWords[index].word;
+        correctWord = seenQuestions[index].word;
         imagePath = "assets/images/${correctWord!.ingilizce}.jpg";
-        options = seenWords[index].options;
+        options = seenQuestions[index].options;
       });
     } else {
       setState(() {
@@ -83,9 +84,9 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
     if (index > 0) {
       index -= 1;
       setState(() {
-        correctWord = seenWords[index].word;
+        correctWord = seenQuestions[index].word;
         imagePath = "assets/images/${correctWord!.ingilizce}.jpg";
-        options = seenWords[index].options;
+        options = seenQuestions[index].options;
       });
     } else {
       print("önceki soru yok");
@@ -104,7 +105,7 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
 // RESET FONKSİYONU
   void resetGame() {
     getWords();
-    seenWords = [];
+    seenQuestions = [];
     index = 0;
     nextQuestion();
   }
@@ -233,7 +234,7 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
 // İLERİ
                 IconButton(
                   onPressed: () {
-                    if (seenWords.length == 10) {
+                    if (seenQuestions.length == 10) {
                       showAlertDialog(context);
                     } else {
                       nextQuestion();
@@ -276,7 +277,11 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
                         () {
                           setState(() {
                             buttonColor1 = Colors.blue;
-                            if (seenWords.length == 10) {
+                            if (seenQuestions.length == 10) {
+                              Kategoriler
+                                  .kategoriler[widget.secilenKategoriIndex]
+                                  .oyunlar[1] = true;
+                              DosyaIslem.writeToFile;
                               showAlertDialog(context);
                             }
                             nextQuestion();
@@ -325,7 +330,11 @@ final class KelimeSecScreenState extends State<KelimeSecScreen> {
                           () {
                             setState(() {
                               buttonColor2 = Colors.blue;
-                              if (seenWords.length == 10) {
+                              if (seenQuestions.length == 10) {
+                                Kategoriler
+                                    .kategoriler[widget.secilenKategoriIndex]
+                                    .oyunlar[1] = true;
+                                DosyaIslem.writeToFile;
                                 showAlertDialog(context);
                               }
                               nextQuestion();
