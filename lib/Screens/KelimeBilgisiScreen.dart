@@ -52,7 +52,8 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
   }
 
   void playSound() {
-    audioPlayer.play(AssetSource("audio/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3"));
+    audioPlayer.play(AssetSource(
+        "audio/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3"));
   }
 
   @override
@@ -135,7 +136,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
               flex: 10,
               child: Container(
                 width: 390,
-                height: 330,
+                height: 270,
                 margin: const EdgeInsets.only(
                     bottom: 50, left: 15, right: 15, top: 23),
                 decoration: BoxDecoration(
@@ -161,7 +162,8 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                 padding: const EdgeInsets.only(left: 0),
                 onPressed: () {
                   setState(() {
-                     if (currentIndex < 9) {  // Değişiklik burada
+                    if (currentIndex < 9) {
+                      // Değişiklik burada
                       _initial += 0.1;
                       currentIndex = (currentIndex + 1);
                       trindex += 1;
