@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
-import 'package:word_wizard/Models/kelime.dart';
 
 class KelimeBilgisi extends StatefulWidget {
   int secilenKategoriIndex = 0;
@@ -51,9 +50,10 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
     return words;
   }
 
-  void playSound() {
+  void playSound(){
     audioPlayer.play(AssetSource(
-        "audio/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3"));
+    "audios/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3"));
+
   }
 
   @override

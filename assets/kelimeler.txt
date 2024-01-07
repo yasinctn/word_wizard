@@ -1,13 +1,13 @@
 köpek-dog-false-[false,false,false,false,false]
 kedi-cat-false
 aslan-lion-false
-tavşan-rabbit-false
-fil-elephant-false
-timsah-alligator-false
-zebra-Zebra-false
-inek-cow-false
+kartal-eagle-false
+at-horse-false
+fare-mouse-false
+yunus-dolphin-false
+bıldırcın-quail-false
 kaplumbağa-turtle-true
-köpek balığı-shark-false
+kelebek-butterfly-false
 öğretmen-teacher-false-[false,true,false,false,false]
 mimar-architect-false
 polis memuru-police officer-false

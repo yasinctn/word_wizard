@@ -140,10 +140,12 @@ class _InputPageState extends State<InputPage> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.blue,
             title: Text(
               'Learning Words',
-              style: TextStyle(color: Colors.black54),
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           body: Column(

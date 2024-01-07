@@ -69,7 +69,12 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(Kategoriler.kategoriler[index].isim),
+                                  Text(
+                                    Kategoriler.kategoriler[index].isim,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold
+                                    ),  
+                                  ),
                                   Card(
                                       child: Padding(
                                     padding: const EdgeInsets.all(8.0),

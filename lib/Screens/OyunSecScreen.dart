@@ -22,7 +22,12 @@ class OyunSecScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Oyun Seçimi'),
+        title: const Text(
+          'Oyun Seçimi',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),  
+        ),
       ),
       body: Center(
         child: Column(
@@ -45,6 +50,7 @@ class OyunSecScreen extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30.0,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -66,6 +72,7 @@ class OyunSecScreen extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30.0,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -89,6 +96,7 @@ class OyunSecScreen extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30.0,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -107,6 +115,7 @@ class OyunSecScreen extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30.0,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -127,13 +136,14 @@ class OyunSecScreen extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30.0,
+                    color: Colors.black,
                   ),
                 ),
               ),
             ),
           ],
         ),
-      ),
+      )
     );
   }
 }

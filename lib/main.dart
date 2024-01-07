@@ -13,8 +13,31 @@ class MainApp extends StatelessWidget {
     List<Widget> sayfalar = [KategoriWidget()/*0,GozdenGecir(),Ayarlar()*/];
     int secilenIndex = 0;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: const  Color.fromRGBO(250, 238, 209, 1),
+        appBarTheme:AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Colors.black,
+          ),
+          color: const Color.fromRGBO(96, 114, 116, 1),
+        ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: Colors.black,
+        ),
+      ),
       home: Scaffold(
-        appBar: AppBar(title: Center(child: Text("Word Wizard"))),
+        appBar: AppBar(
+          title: Center(
+            child: Text(
+              "Word Wizard",
+              style: TextStyle(
+                fontWeight:FontWeight.bold),
+            )
+          )
+        ),
         body: sayfalar[secilenIndex],
         bottomNavigationBar: BottomNavigationBar(items: [
           BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Ana Sayfa'),
