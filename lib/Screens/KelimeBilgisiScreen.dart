@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
+import 'package:word_wizard/Screens/gozdengecir.dart';
 
 class KelimeBilgisi extends StatefulWidget {
   int secilenKategoriIndex = 0;
@@ -267,9 +268,16 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                 ),
               ),
             ),
+            /*
             FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => GozdenGecir()),
+                  );
+                },
                 child: const Icon(Icons.remove_red_eye_sharp)),
+                */
           ],
         )
       ],
