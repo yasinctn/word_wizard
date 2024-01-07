@@ -22,10 +22,6 @@ class stateGozdenGecir extends State<GozdenGecir> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Gözden Geçir"),
-          centerTitle: true,
-        ),
         body: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -36,23 +32,6 @@ class stateGozdenGecir extends State<GozdenGecir> {
             ],
           ),
         ),
-        bottomNavigationBar:
-            BottomNavigationBar(items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_filled),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-       
-        ],
-          currentIndex: selectedIndex,
-          selectedItemColor: Colors.amber[800],
-          onTap: onItemTapped,
-        ),
-        
       ),
     );
   }

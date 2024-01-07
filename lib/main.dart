@@ -1,20 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:word_wizard/Screens/ayarlar.dart';
+import 'package:word_wizard/Screens/gozdengecir.dart';
 import 'package:word_wizard/Screens/kategori_widget.dart';
+import 'package:word_wizard/theme_provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(   
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: MainApp()
+    ),
+  );
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
   @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+List<Widget> sayfalar = [KategoriWidget(),GozdenGecir(),AppTheme()];
+int secilenIndex = 0;
+
+class _MainAppState extends State<MainApp> {
+
   Widget build(BuildContext context) {
-    List<Widget> sayfalar = [KategoriWidget()/*0,GozdenGecir(),Ayarlar()*/];
-    int secilenIndex = 0;
+    final provider=Provider.of<ThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+      theme: provider.theme==Brightness.light?ThemeData(
         scaffoldBackgroundColor: const  Color.fromRGBO(250, 238, 209, 1),
         appBarTheme:AppBarTheme(
           titleTextStyle: TextStyle(
@@ -27,7 +43,7 @@ class MainApp extends StatelessWidget {
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           selectedItemColor: Colors.black,
         ),
-      ),
+      ):ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
           title: Center(
@@ -43,7 +59,12 @@ class MainApp extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Ana Sayfa'),
           BottomNavigationBarItem(icon: Icon(Icons.rocket),label: 'Gözden Geçir'),
           BottomNavigationBarItem(icon: Icon(Icons.settings),label: 'Ayarlar'),
-        ]),
+          ],
+          currentIndex: secilenIndex,
+          onTap: (value) => setState(() {
+            secilenIndex=value;
+          }),
+        ),
         )
     );
   }

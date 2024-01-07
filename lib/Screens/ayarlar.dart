@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:word_wizard/theme_provider.dart';
 
 // GECE / GUNDUZ AYARI 
 // KENDI EKRANINIZ GORE DEGISKEN EKLEYIN
@@ -26,7 +28,7 @@ Color appBarBackground = const Color.fromRGBO(96, 114, 116,1); // DEFAULT APPBAR
 Color appBarBackgroundDay = const Color.fromRGBO(96, 114, 116,1);
 Color appBarBackgroundNight = Color.fromRGBO(36,52,71,1);
 
-changeColor(){
+void changeColor(){
   if (light == true)  // SU AN GECE
   {
   trTextColor = trTextColorNight;
@@ -60,14 +62,13 @@ class AppTheme extends StatefulWidget {
 
 class _AppThemeState extends State<AppTheme> {
   
-
-  
   @override
   Widget build(BuildContext  
   
   context) {
+    final provider =Provider.of<ThemeProvider>(context);
     return  Scaffold(
-      appBar: AppBar(title: Text('App Theme'),
+      /*appBar: AppBar(title: Text('App Theme'),
       backgroundColor: appBarBackground,
       
         leading:  Builder(
@@ -79,7 +80,7 @@ class _AppThemeState extends State<AppTheme> {
             },
                icon: const Icon(Icons.arrow_back_ios_new));
           }
-        ),),
+        ),),*/
       
       body: Container(
         decoration: BoxDecoration(color: backgroundColorr),
@@ -120,7 +121,13 @@ class _AppThemeState extends State<AppTheme> {
                         setState(() {
                              light = value;
                               changeColor();
-                              
+                              if(light==true)
+                              {
+                                provider.setThemeMode(Brightness.dark);
+                              }
+                              else{
+                                provider.setThemeMode(Brightness.light);
+                              }                           
                           });
                         
                         
