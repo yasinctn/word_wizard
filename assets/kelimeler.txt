@@ -31,7 +31,7 @@ motorsiklet-motorcycle-false
 futbol-football-true-[false,true,false,false,false]
 basketbol-basketball-false
 voleybol-volleyball-false
-tenis-tennis-true
+masa tenisi-table tennis-true
 boks-boxing-false
 okçuluk-archery-false
 halter-weightlifting-false
