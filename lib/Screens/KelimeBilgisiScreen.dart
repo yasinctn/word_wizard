@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
+import 'package:word_wizard/Models/kelime.dart';
 import 'package:word_wizard/Screens/gozdengecir.dart';
 
 class KelimeBilgisi extends StatefulWidget {
@@ -26,6 +27,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
   int engindex = 0;
   int voiceindex = 0;
   int imageindex = 0;
+  int ogren = 0;
   double _initial = 0.1;
   // ignore: unused_element
 
@@ -51,10 +53,15 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
     return words;
   }
 
-  void playSound(){
+  void playSound() {
     audioPlayer.play(AssetSource(
-    "audios/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3"));
+        "audios/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3"));
+  }
 
+  ogrenilenkelimesayisi() {
+    bool words = Kategoriler.kategoriler[widget.secilenKategoriIndex]
+        .kelimeListesi[engindex].ogrenildi = true;
+    return words;
   }
 
   @override
@@ -91,6 +98,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
             Expanded(
               child: _stepIndicator(),
             ),
+            /*
             IconButton(
               onPressed: () {},
               icon: const Icon(
@@ -99,6 +107,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                 size: 35,
               ),
             ),
+            */
           ],
         ),
         const Padding(padding: EdgeInsets.only(bottom: 15)),
@@ -171,6 +180,8 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                       engindex += 1;
                       voiceindex += 1;
                       imageindex += 1;
+                      ogrenilenkelimesayisi();
+                      ogren += 1;
                     } else {
                       Navigator.pop(context);
                     }
