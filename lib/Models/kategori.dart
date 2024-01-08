@@ -18,4 +18,13 @@ class Kategori {
     }
     return progress;
   }
+  int ogrSayisiDondur(){
+    int sayi = 0;
+    for(var kelime in kelimeListesi){
+      if(kelime.ogrenildi){
+        sayi++;
+      }
+    }
+    return sayi;
+  }
 }

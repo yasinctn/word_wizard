@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
 import 'package:word_wizard/Models/kelime.dart';
 import 'package:word_wizard/Screens/gozdengecir.dart';
+import 'package:word_wizard/dosyaIslem.dart';
+import 'package:word_wizard/main.dart';
 
 class KelimeBilgisi extends StatefulWidget {
   int secilenKategoriIndex = 0;
@@ -60,9 +62,9 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
   }
 
 
-  void ogrenilenkelimeler() {
+  void ogrenilenkelimeler(int i) {
     Kategoriler.kategoriler[widget.secilenKategoriIndex]
-        .kelimeListesi[currentIndex].ogrenildi = true;
+        .kelimeListesi[i].ogrenildi = true;
   }
 
   @override
@@ -171,18 +173,23 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                         padding: const EdgeInsets.only(left: 0),
                         onPressed: () {
                           setState(() {
+                            if(currentIndex==9)
+                              Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[currentIndex].ogrenildi = true;
                             if (currentIndex < 9) {
                               // Değişiklik burada
                               _initial += 0.1;
-                              currentIndex = (currentIndex + 1);
-                              ogrenilenkelimeler();
+                              ogrenilenkelimeler(currentIndex);
+                              //currentIndex = (currentIndex + 1);
                               trindex += 1;
                               engindex += 1;
                               voiceindex += 1;
                               imageindex += 1;
                             } else {
+                              Kategoriler.kategoriler[widget.secilenKategoriIndex].oyunlar[0] = true;
+                              DosyaIslem.writeToFile();
                               Navigator.pop(context);
                             }
+                            currentIndex++;
                           });
                         },
                         icon: const Icon(

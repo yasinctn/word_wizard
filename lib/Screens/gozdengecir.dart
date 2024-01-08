@@ -21,16 +21,27 @@ class stateGozdenGecir extends State<GozdenGecir> {
 
   @override
   Widget build(BuildContext context) {
+    List<Kelime> kelimeler = Kategoriler.ogrenilenDondur();
     return SafeArea(
       child: Scaffold(
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ContainerWidget(
-                  text: "Gözden Geçir: ${Kategoriler.ogrenilenDondur()}"),
+              Expanded(
+                child: ListView.builder(
+                          itemCount: kelimeler.length,
+                          itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(kelimeler[index].ingilizce),
+                  subtitle: Text(kelimeler[index].turkce),
+                );
+                          }),
+              ),
+            /*  ContainerWidget(
+                  text: "Gözden Geçir:"),
               //   ContainerWidget(text: "Hatalar"),
-              //  ContainerWidget(text: "Öğrenilen Kelime Sayısı:")
+              //  ContainerWidget(text: "Öğrenilen Kelime Sayısı:")*/
             ],
           ),
         ),

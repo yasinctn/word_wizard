@@ -22,7 +22,11 @@ class _KategoriWidgetState extends State<KategoriWidget> {
   }
 
   void kategoriGuncelle() {
-    setState(() {});
+    setState(() {
+      for(var kategori in Kategoriler.kategoriler){
+        kategori.ogrenilenKelime = kategori.ogrSayisiDondur();
+      }
+    });
   }
 
   @override
