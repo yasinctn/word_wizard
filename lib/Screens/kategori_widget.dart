@@ -25,8 +25,6 @@ class _KategoriWidgetState extends State<KategoriWidget> {
     setState(() {});
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,10 +45,15 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                   margin:
                       EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
                   child: ElevatedButton(
-                    onPressed: () async{
-                        await Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => OyunSecScreen(secilenKategoriIndex: index,)),);
-                          kategoriGuncelle();
+                    onPressed: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => OyunSecScreen(
+                                  secilenKategoriIndex: index,
+                                )),
+                      );
+                      kategoriGuncelle();
                     },
                     child: ListTile(
                       title: Container(
@@ -71,9 +74,8 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                                 children: [
                                   Text(
                                     Kategoriler.kategoriler[index].isim,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold
-                                    ),  
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   Card(
                                       child: Padding(
@@ -88,17 +90,17 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                                   )),
                                   Container(
                                     height: 10,
-                                    width: 300,
-                                      child: LinearProgressIndicator(
-                                        borderRadius: BorderRadius.circular(10),
-                                        value: Kategoriler.kategoriler[index]
-                                            .progressHesapla(),
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 222, 219, 219),
-                                        valueColor: AlwaysStoppedAnimation<Color>(
-                                            Colors.green),
-                                      ),
+                                    width: 199,
+                                    child: LinearProgressIndicator(
+                                      borderRadius: BorderRadius.circular(10),
+                                      value: Kategoriler.kategoriler[index]
+                                          .progressHesapla(),
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 222, 219, 219),
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.green),
                                     ),
+                                  ),
                                 ]),
                           ],
                         ),
