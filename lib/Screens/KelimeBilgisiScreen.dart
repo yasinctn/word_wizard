@@ -84,32 +84,34 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
             //backgroundColor: Colors.blueGrey,
             body: Column(
       children: [
-        Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios_sharp,
-                color: Colors.blueAccent,
-                size: 33,
+        Expanded(
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios_sharp,
+                  color: Colors.blueAccent,
+                  size: 33,
+                ),
               ),
-            ),
-            Expanded(
-              child: _stepIndicator(),
-            ),
-            /*
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.more_horiz,
-                color: Colors.blueAccent,
-                size: 35,
+              Expanded(
+                child: _stepIndicator(),
               ),
-            ),
-            */
-          ],
+              /*
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.more_horiz,
+                  color: Colors.blueAccent,
+                  size: 35,
+                ),
+              ),
+              */
+            ],
+          ),
         ),
         const Padding(padding: EdgeInsets.only(bottom: 15)),
         const Text(
@@ -202,7 +204,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
         ),
         Container(
           margin:
-              const EdgeInsets.only(bottom: 22, left: 50, right: 50, top: 50),
+          const EdgeInsets.only(bottom: 22, left: 50, right: 50, top: 50),
           width: 360,
           height: 150,
           decoration: BoxDecoration(
@@ -234,62 +236,64 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
             ],
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            InkResponse(
-              onTap: () {
-                setState(() {
-                  isPressed = !isPressed;
-                });
-              },
-              child: Ink(
-                decoration: ShapeDecoration(
-                  color: Colors.blue, // Buton rengi
-                  shape: const CircleBorder(),
-                  shadows: [
-                    BoxShadow(
-                      color: isPressed
-                          ? Colors.green
-                          : const Color.fromARGB(0, 183, 173, 95),
-                      spreadRadius: 4,
-                      blurRadius: 5,
-                      offset: const Offset(0, 0),
-                    ),
-                  ],
-                ),
-                child: SizedBox(
-                  width: 54.0,
-                  height: 54.0,
-                  child: IconButton(
-                    icon: const Icon(Icons.mic),
-                    color: Colors.white,
-                    onPressed: () {
-                      playSound();
-                      setState(() {
-                        isPressed = !isPressed;
-                        Timer(const Duration(seconds: 2), () {
-                          setState(() {
-                            isPressed = false; // 3 saniye sonra gölgeyi kapat
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InkResponse(
+                onTap: () {
+                  setState(() {
+                    isPressed = !isPressed;
+                  });
+                },
+                child: Ink(
+                  decoration: ShapeDecoration(
+                    color: Colors.blue, // Buton rengi
+                    shape: const CircleBorder(),
+                    shadows: [
+                      BoxShadow(
+                        color: isPressed
+                            ? Colors.green
+                            : const Color.fromARGB(0, 183, 173, 95),
+                        spreadRadius: 4,
+                        blurRadius: 5,
+                        offset: const Offset(0, 0),
+                      ),
+                    ],
+                  ),
+                  child: SizedBox(
+                    width: 54.0,
+                    height: 54.0,
+                    child: IconButton(
+                      icon: const Icon(Icons.mic),
+                      color: Colors.white,
+                      onPressed: () {
+                        playSound();
+                        setState(() {
+                          isPressed = !isPressed;
+                          Timer(const Duration(seconds: 2), () {
+                            setState(() {
+                              isPressed = false; // 3 saniye sonra gölgeyi kapat
+                            });
                           });
                         });
-                      });
-                    },
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-            /*
-            FloatingActionButton(
-                onPressed: () {
-                  Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => GozdenGecir()),
-                  );
-                },
-                child: const Icon(Icons.remove_red_eye_sharp)),
-                */
-          ],
+              /*
+              FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => GozdenGecir()),
+                    );
+                  },
+                  child: const Icon(Icons.remove_red_eye_sharp)),
+                  */
+            ],
+          ),
         )
       ],
     )));
