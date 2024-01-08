@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:word_wizard/Models/kategoriler.dart';
+import 'package:word_wizard/Models/kelime.dart';
 
 class GozdenGecir extends StatefulWidget {
-  const GozdenGecir({super.key});
+  GozdenGecir({super.key});
 
   @override
   State<GozdenGecir> createState() => stateGozdenGecir();
@@ -9,26 +11,26 @@ class GozdenGecir extends StatefulWidget {
 
 // ignore: camel_case_types
 class stateGozdenGecir extends State<GozdenGecir> {
-    int selectedIndex = 0;
-   
+  int selectedIndex = 0;
 
-    void onItemTapped(int index) {
-      setState(() {
-        selectedIndex = index;
-      });
-     }
+  void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: const Center(
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ContainerWidget(text: "Gözden Geçir"),
-              ContainerWidget(text: "Hatalar"),
-              ContainerWidget(text: "Öğrenilen Kelime Sayısı")
+              ContainerWidget(
+                  text: "Gözden Geçir: ${Kategoriler.ogrenilenDondur()}"),
+              //   ContainerWidget(text: "Hatalar"),
+              //  ContainerWidget(text: "Öğrenilen Kelime Sayısı:")
             ],
           ),
         ),
@@ -45,6 +47,7 @@ class ContainerWidget extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
+    List<Kelime> kelimeler = [];
     return Padding(
       padding: const EdgeInsets.all(25.0),
       child: Container(
@@ -62,7 +65,14 @@ class ContainerWidget extends StatelessWidget {
         ),
         width: 250,
         height: 100,
-        child: Center(child: Text(text)),
+        child: ListView.builder(
+            itemCount: kelimeler.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(kelimeler[index].ingilizce),
+                subtitle: Text(kelimeler[index].turkce),
+              );
+            }),
       ),
     );
   }

@@ -49,4 +49,16 @@ class Kategoriler {
           "${kategori.isim} ${kategori.ogrenilenKelime}/${kategori.toplamKelime}\n${kategori.kelimeListesi[0].turkce}\n${kategori.oyunlar}\n");
     }
   }
+
+  static List<Kelime> ogrenilenDondur() {
+    List<Kelime> ogrenilenler = [];
+    for (var kategori in kategoriler) {
+      for (var kelime in kategori.kelimeListesi) {
+        if (kelime.ogrenildi) {
+          ogrenilenler.add(kelime);
+        }
+      }
+    }
+    return ogrenilenler;
+  }
 }

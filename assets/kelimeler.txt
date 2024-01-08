@@ -6,9 +6,9 @@ at-horse-false
 fare-mouse-false
 yunus-dolphin-false
 bıldırcın-quail-false
-kaplumbağa-turtle-true
+kaplumbağa-turtle-false
 kelebek-butterfly-false
-öğretmen-teacher-false-[false,true,false,false,false]
+öğretmen-teacher-false-[false,false,false,false,false]
 mimar-architect-false
 polis memuru-police officer-false
 doktor-doctor-false
@@ -18,8 +18,8 @@ asker-soldier-false
 aşçı-cook-false
 garson-waiter-false
 yazılımcı-programmer-false
-uçak-plane-false-[true,false,false,false,false]
-araba-car-true
+uçak-plane-false-[false,false,false,false,false]
+araba-car-false
 otobüs-bus-false
 gemi-ship-false
 tren-train-false
@@ -28,17 +28,17 @@ yelken-sail-false
 tır-truck-false
 bisiklet-bicycle-false
 motorsiklet-motorcycle-false
-futbol-football-true-[false,true,false,false,false]
+futbol-football-false-[false,false,false,false,false]
 basketbol-basketball-false
 voleybol-volleyball-false
-masa tenisi-table tennis-true
+masa tenisi-table tennis-false
 boks-boxing-false
 okçuluk-archery-false
 halter-weightlifting-false
-güreş-wrestling-true
+güreş-wrestling-false
 hentbol-handball-false
 cirit atma-javelin throw-false
-elma-apple-false-[false,true,false,true,true]
+elma-apple-false-[false,false,false,false,false]
 muz-banana-false
 kiraz-cherry-false
 üzüm-grape-false
@@ -48,7 +48,7 @@ ananas-pineapple-false
 karpuz-watermelon-false
 mandalina-tangerine-false
 böğürtlen-blackberry-false
-koltuk-armchair-false-[false,true,false,true,false]
+koltuk-armchair-false-[false,false,false,false,false]
 kuvet-bath-false
 yatak-bed-false
 sandalye-chair-false
@@ -57,4 +57,4 @@ buzdolabı-fridge-false
 fırın-oven-false
 duşluk-shower-false
 masa-table-false
-gardırop-wardrobe-true
+gardırop-wardrobe-false

@@ -1,3 +1,4 @@
+//KelimeBilgisiSec Secreen
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -58,9 +59,9 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
         "audios/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3"));
   }
 
-  ogrenilenkelimesayisi() {
-    bool words = Kategoriler.kategoriler[widget.secilenKategoriIndex]
-        .kelimeListesi[engindex].ogrenildi = true;
+  bool ogrenilenkelimeler() {
+    bool words = (Kategoriler.kategoriler[widget.secilenKategoriIndex]
+        .kelimeListesi[currentIndex].ogrenildi=true);
     return words;
   }
 
@@ -176,12 +177,11 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                       // Değişiklik burada
                       _initial += 0.1;
                       currentIndex = (currentIndex + 1);
+                      ogrenilenkelimeler();
                       trindex += 1;
                       engindex += 1;
                       voiceindex += 1;
                       imageindex += 1;
-                      ogrenilenkelimesayisi();
-                      ogren += 1;
                     } else {
                       Navigator.pop(context);
                     }
