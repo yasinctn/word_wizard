@@ -61,7 +61,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
 
   bool ogrenilenkelimeler() {
     bool words = (Kategoriler.kategoriler[widget.secilenKategoriIndex]
-        .kelimeListesi[currentIndex].ogrenildi=true);
+        .kelimeListesi[currentIndex].ogrenildi = true);
     return words;
   }
 
@@ -98,7 +98,10 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                 ),
               ),
               Expanded(
-                child: _stepIndicator(),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: _stepIndicator(),
+                ),
               ),
               /*
               IconButton(
@@ -204,7 +207,7 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
         ),
         Container(
           margin:
-          const EdgeInsets.only(bottom: 22, left: 50, right: 50, top: 50),
+              const EdgeInsets.only(bottom: 22, left: 50, right: 50, top: 50),
           width: 360,
           height: 150,
           decoration: BoxDecoration(
