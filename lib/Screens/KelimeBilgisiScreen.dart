@@ -54,15 +54,15 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
     return words;
   }
 
-  void playSound() {
-    audioPlayer.play(AssetSource(
-        "audios/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.mp3"));
+  void playSound() async  {
+    await audioPlayer.play(AssetSource(
+        "audios/${Kategoriler.kategoriler[widget.secilenKategoriIndex].kelimeListesi[voiceindex].ingilizce}.m4a"));
   }
 
-  bool ogrenilenkelimeler() {
-    bool words = (Kategoriler.kategoriler[widget.secilenKategoriIndex]
-        .kelimeListesi[currentIndex].ogrenildi = true);
-    return words;
+
+  void ogrenilenkelimeler() {
+    Kategoriler.kategoriler[widget.secilenKategoriIndex]
+        .kelimeListesi[currentIndex].ogrenildi = true;
   }
 
   @override
