@@ -4,146 +4,63 @@ import 'package:word_wizard/Screens/KelimeOgren.dart';
 import 'package:word_wizard/Screens/KelimeSecScreen.dart';
 import 'package:word_wizard/Screens/my_home_page.dart';
 import 'package:word_wizard/Screens/kelimeYaz.dart';
+import 'package:word_wizard/oyun_widget.dart';
 
 class OyunSecScreen extends StatelessWidget {
   int secilenKategoriIndex = 0;
   OyunSecScreen({super.key, required this.secilenKategoriIndex});
 
-// NAVİGASYON FONKSİYONU
-  void navigateTo(BuildContext context, Widget route) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => route),
-    );
-  }
-
 // KULLANICI ARAYÜZÜ
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Oyun Seçimi',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),  
+        appBar: AppBar(
+          title: const Text(
+            'Oyun Seçimi',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  width: 180,
-                  height: 180,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => KelimeBilgisi(secilenKategoriIndex:secilenKategoriIndex,)),);
-                    },
-                    child: const Text(
-                      'Kelime Bilgisi',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30.0,
-                        color: Colors.black,
-                      ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  oyun_widget(
+                    title: "Kelime Bilgisi",
+                    route: KelimeBilgisi(
+                      secilenKategoriIndex: secilenKategoriIndex,
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 180,
-                  height: 180,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      navigateTo(
-                        context,
-                        KelimeSecScreen(
-                            secilenKategoriIndex: secilenKategoriIndex),
-                      );
-                    },
-                    child: const Text(
-                      'Kelime Seç',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30.0,
-                        color: Colors.black,
-                      ),
-                    ),
+                  oyun_widget(
+                    title: "Kelime Seç",
+                    route: KelimeSecScreen(
+                        secilenKategoriIndex: secilenKategoriIndex),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  width: 180,
-                  height: 180,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => MyHomePage(secilenKategoriIndex,)),);
-                    },
-                    child: const Text(
-                      'Kelime Eşleştir',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30.0,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 180.0,
-                  height: 180.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => Project1(KategoriIndex:secilenKategoriIndex,)),);
-                    },
-                    child: const Text(
-                      'Kelime Yaz',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30.0,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 180,
-              height: 180,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => InputPage(secilenKategoriIndex,)),);
-                    },
-                child: const Text(
-                  'Resim Seç',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30.0,
-                    color: Colors.black,
-                  ),
-                ),
+                ],
               ),
-            ),
-          ],
-        ),
-      )
-    );
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  oyun_widget(
+                    title: "Kelime Eşleştir",
+                    route: MyHomePage(secilenKategoriIndex),
+                  ),
+                  oyun_widget(
+                    title: "Kelime Yaz",
+                    route: Project1(KategoriIndex: secilenKategoriIndex),
+                  ),
+                ],
+              ),
+              oyun_widget(
+                title: "Resim Seç",
+                route: InputPage(secilenKategoriIndex),
+              )
+            ],
+          ),
+        ));
   }
 }
