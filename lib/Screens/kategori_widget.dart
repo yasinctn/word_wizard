@@ -49,6 +49,9 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                   margin:
                       EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
                   child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll( Color.fromARGB(255, 197, 171, 152),),),
+                    
                     onPressed: () async {
                       await Navigator.push(
                         context,
@@ -60,6 +63,7 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                       kategoriGuncelle();
                     },
                     child: ListTile(
+                      // tileColor: Colors.brown,
                       title: Container(
                         padding: EdgeInsets.all(5),
                         child: Row(
@@ -79,16 +83,19 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                                   Text(
                                     Kategoriler.kategoriler[index].isim,
                                     style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                        const TextStyle(fontWeight: FontWeight.bold,color:   Colors.black,),
                                   ),
                                   Card(
+                                    color: Color.fromRGBO(250, 238, 209, 1),
                                       child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
                                       children: [
                                         Text(
-                                            "${Kategoriler.kategoriler[index].ogrenilenKelime}/${Kategoriler.kategoriler[index].toplamKelime}"),
-                                        Text('Kelimeler')
+                                        "${Kategoriler.kategoriler[index].ogrenilenKelime}/${Kategoriler.kategoriler[index].toplamKelime}",
+                                        style:  const TextStyle(color: Colors.black),),
+                                        Text('Kelimeler',
+                                        style:  const TextStyle(color: Colors.black),)
                                       ],
                                     ),
                                   )),
@@ -99,8 +106,7 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                                       borderRadius: BorderRadius.circular(10),
                                       value: Kategoriler.kategoriler[index]
                                           .progressHesapla(),
-                                      backgroundColor: const Color.fromARGB(
-                                          255, 222, 219, 219),
+                                      backgroundColor: const Color.fromRGBO(250, 238, 209, 1),
                                       valueColor: AlwaysStoppedAnimation<Color>(
                                           Colors.green),
                                     ),
