@@ -159,6 +159,7 @@ class _InputPageState extends State<InputPage> {
                       Expanded(
                           flex: 40,
                           child: MyContainer(
+                            
                             onpress: () =>
                                 onTapFunc(resault[indexler[0]], (newColor) {
                               setState(() {
@@ -174,6 +175,7 @@ class _InputPageState extends State<InputPage> {
                             renk: getcolor,
                             child: Text(
                               '${dictinory[resault[indexler[0]]].ingilizce}',
+                              style: const TextStyle(color: Colors.black,fontSize: 30),
                             ),
                           )),
                       Expanded(flex: 1, child: SizedBox()),
@@ -194,6 +196,7 @@ class _InputPageState extends State<InputPage> {
                             }),
                             renk: getcolor2,
                             child: Text(
+                              style: const TextStyle(color: Colors.black,fontSize: 30),
                               '${dictinory[resault[indexler[1]]].ingilizce}',
                             ),
                           )),
@@ -229,6 +232,7 @@ class _InputPageState extends State<InputPage> {
                             }),
                             renk: getcolor3,
                             child: Text(
+                              style: const TextStyle(color: Colors.black,fontSize: 30),
                               '${dictinory[resault[indexler[2]]].ingilizce}',
                             ),
                           )),
@@ -250,6 +254,11 @@ class _InputPageState extends State<InputPage> {
                             }),
                             renk: getcolor4,
                             child: Text(
+                              
+                              style: 
+                              const TextStyle(
+                                color: Colors.black,fontSize: 30),
+                              
                               '${dictinory[resault[indexler[3]]].ingilizce}',
                             ),
                           )),
