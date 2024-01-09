@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
 import 'package:word_wizard/Models/kelime.dart';
+import 'package:word_wizard/main.dart';
 
 class Project1 extends StatefulWidget {
   Project1({super.key, required this.KategoriIndex});
@@ -15,18 +16,29 @@ String imagePath = "";
 
 bool isButtonActive = true;
 
+double progress = 0.1;
+
 class _Project1State extends State<Project1> {
   Widget _stepIndicator() {
     return (LinearProgressIndicator(
       borderRadius: BorderRadius.circular(12.0),
       backgroundColor: Colors.grey[350],
       valueColor: const AlwaysStoppedAnimation(Colors.green),
-      minHeight: 10.0,
-      value: _initial,
+      minHeight: 10,
+      value: progress,
+      
     ));
   }
 
-  double _initial = 0.1;
+void shrinkIndicator() {
+  progress += 0.1;
+}
+void shrinkIndicatortwo(){
+  progress -= 0.1;
+}
+
+  double initial = 0.1;
+
   final _textController = TextEditingController();
 
   String userInput = '';
@@ -91,6 +103,7 @@ class _Project1State extends State<Project1> {
     setState(() {
       String correct = returnEnglish();
       if (userInput != correct) {
+        
         print('renk degisti');
         scoreKeeper.add(
           const Icon(Icons.close, color: Color.fromARGB(255, 255, 255, 255)),
@@ -102,6 +115,7 @@ class _Project1State extends State<Project1> {
 
         Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex]
             .correction = 2;
+        shrinkIndicator();
       } else {
         scoreKeeper.add(
           const Icon(Icons.check, color: Color.fromARGB(255, 255, 255, 255)),
@@ -113,7 +127,7 @@ class _Project1State extends State<Project1> {
         isButtonActive = true;
         Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex]
             .correction = 1;
-        _initial += 0.1;
+        shrinkIndicator();
       }
     });
   }
@@ -149,25 +163,17 @@ class _Project1State extends State<Project1> {
         leading: IconButton(
             onPressed: () {
               setState(() {
+                Kategoriler.kategoriler[secilenIndex].oyunlar[3];
                 Navigator.pop(context);
               });
             },
             icon: const Icon(Icons.arrow_back_ios_new)),
         backgroundColor: const Color.fromRGBO(96, 114, 116, 1),
         title: const Text('Find The Word'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                setState(() {
-                  // theEnd();
-                });
-              },
-              icon: const Icon(Icons.settings)),
-        ],
+        
       ),
       body: Container(
-        decoration:
-            const BoxDecoration(color: Color.fromRGBO(250, 238, 209, 1)),
+       
         padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
         constraints: const BoxConstraints.expand(),
         child: SafeArea(
@@ -186,12 +192,13 @@ class _Project1State extends State<Project1> {
                         setState(() {
                           print('going back');
                           goBack();
-
+                          
                           returnEnglish();
                           returnTurkish();
                           colour = Colors.white.withOpacity(0);
                           lightColor();
                           isVisible();
+                          shrinkIndicatortwo();
                         });
                       },
                       icon: const Icon(Icons.arrow_back_ios_new),
@@ -225,6 +232,7 @@ class _Project1State extends State<Project1> {
                           colour = Colors.white.withOpacity(0);
                           lightColor();
                           isVisible();
+                          shrinkIndicator();
                         });
                       },
                       icon: const Icon(Icons.arrow_forward_ios),
@@ -245,7 +253,7 @@ class _Project1State extends State<Project1> {
                   returnTurkish(),
                   style: const TextStyle(
                     fontSize: 32.0,
-                    color: Color.fromRGBO(62, 75, 76, 1),
+                    
                     fontWeight: FontWeight.w500,
                   ),
                 ),
