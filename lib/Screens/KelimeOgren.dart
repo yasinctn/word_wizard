@@ -1,290 +1,360 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:word_wizard/Models/kategoriler.dart';
 import 'package:word_wizard/Models/kelime.dart';
-import 'package:word_wizard/dosyaIslem.dart';
+import 'package:word_wizard/main.dart';
 
-class InputPage extends StatefulWidget {
-  int gelenIndex;
-  InputPage(this.gelenIndex);
+class Project1 extends StatefulWidget {
+  Project1({super.key, required this.KategoriIndex});
+  int KategoriIndex = 0;
   @override
-  _InputPageState createState() => _InputPageState();
+  State<Project1> createState() => _Project1State();
 }
 
-class _InputPageState extends State<InputPage> {
-  int index = 0;
-  List<Kelime> dictinory = [];
+bool isFirst = true;
 
-  Color getcolor = Colors.white;
-  Color getcolor2 = Colors.white;
-  Color getcolor3 = Colors.white;
-  Color getcolor4 = Colors.white;
+String imagePath = "";
 
-  List<bool> dogruYanlis = [
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-  ];
-  void showDialogs() {
-    Widget okButton = TextButton(
-      child: Text("Çıkış"),
-      onPressed: () {
-       // Navigator.pop(context);
-      },
-    );
+bool isButtonActive = true;
 
-    AlertDialog alert = AlertDialog(
-      content: Text("Testin sonuna gelidiniz!"),
-      actions: [
-        okButton,
-      ],
-    );
+double progress = 0.1;
 
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
+class _Project1State extends State<Project1> {
+  Widget _stepIndicator() {
+    return (LinearProgressIndicator(
+      borderRadius: BorderRadius.circular(12.0),
+      backgroundColor: Colors.grey[350],
+      valueColor: const AlwaysStoppedAnimation(Colors.green),
+      minHeight: 10,
+      value: progress,
+      
+    ));
   }
 
-  int dogruIndex = 0;
-  List<int> generetorNumber() {
-    List<int> number = [];
+void shrinkIndicator() {
+  progress += 0.1;
+}
+void shrinkIndicatortwo(){
+  progress -= 0.1;
+}
 
-    bool kontrol = true;
-    if (!dogruYanlis.contains(true)) {
-      kontrol = false;
-    }
-    while (kontrol) {
-      int randomNumberTrue = Random().nextInt(10);
-      if (dogruYanlis[randomNumberTrue]) {
-        dogruYanlis[randomNumberTrue] = false;
-        number.add(randomNumberTrue);
-        kontrol = false;
-      }
-    }
+  double initial = 0.1;
 
-    while (number.length < 4) {
-      int randomNumber = Random().nextInt(10);
-      if (!number.contains(randomNumber)) {
-        number.add(randomNumber);
-      }
-    }
-    return number;
+  final _textController = TextEditingController();
+
+  String userInput = '';
+
+  int gezenIndex = 0;
+
+  void goForward() {
+    gezenIndex++;
   }
 
-  int count = 0;
-  @override
-  void initState() {
-    index = widget.gelenIndex;
-    dictinory = Kategoriler.kategoriler[index].kelimeListesi;
-    resault = generetorNumber();
-    generetorIndex();
-
-    super.initState();
+  void goBack() {
+    gezenIndex--;
   }
 
-  List<int> resault = [];
-  onTapFunc(int listNumber, Function(Color) updateColor) {
+  String returnTurkish() {
+    List<Kelime> otherWords =
+        Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi;
+    return otherWords[gezenIndex].turkce;
+  }
+
+  String returnEnglish() {
+    List<Kelime> otherWords =
+        Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi;
+    return otherWords[gezenIndex].ingilizce;
+  }
+
+// void changeIt(){
+// if (isFirst) {
+//       fillList();
+//       isFirst = false;
+//     }
+//     fillList();
+// }
+
+  Color? colour = Colors.white.withOpacity(0);
+
+  List<Icon> scoreKeeper = [];
+
+  int correctAnswers = 0, wrongAnswers = 0;
+
+  int textFieldActive = 0;
+
+  Color forwardArrayColor = Colors.black;
+
+  Color backArrayColor = Colors.white.withOpacity(0);
+
+  Color ColourBorder = Colors.yellow.shade600;
+
+  void isVisible() {
+    if (gezenIndex == 0) {
+      forwardArrayColor = Colors.black;
+    } else if (gezenIndex == 9) {
+      Navigator.pop(context);
+    } else {
+      backArrayColor = Colors.white.withOpacity(1);
+      backArrayColor = Colors.black;
+      forwardArrayColor = Colors.black;
+    }
+  }
+
+  void checkIt() {
     setState(() {
-      Color newColor;
+      String correct = returnEnglish();
+      if (userInput != correct) {
+        
+        print('renk degisti');
+        scoreKeeper.add(
+          const Icon(Icons.close, color: Color.fromARGB(255, 255, 255, 255)),
+        );
 
-      if (dictinory[resault[0]].turkce == dictinory[listNumber].turkce) {
-        newColor = Colors.green;
+        colour = const Color.fromARGB(255, 198, 56, 45).withRed(170);
+        wrongAnswers++;
+        ColourBorder = Colors.red;
 
-        Future.delayed(Duration(seconds: 1), () {
-          setState(() {
-            count++;
-            newColor = Colors.white;
-            updateColor(newColor);
-            resault = generetorNumber();
-            generetorIndex();
-          });
-        });
-        updateColor(newColor);
+        Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex]
+            .correction = 2;
+        shrinkIndicator();
       } else {
-        newColor = Colors.red;
-        updateColor(newColor);
-        Future.delayed(Duration(seconds: 1), () {
-          setState(() {
-            newColor = Colors.white;
-            updateColor(newColor);
-          });
-        });
+        scoreKeeper.add(
+          const Icon(Icons.check, color: Color.fromARGB(255, 255, 255, 255)),
+        );
+
+        colour = Color.fromARGB(255, 47, 106, 49).withGreen(220);
+        correctAnswers++;
+        ColourBorder = Colors.green;
+        isButtonActive = true;
+        Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex]
+            .correction = 1;
+        shrinkIndicator();
       }
     });
   }
 
-  List<int> indexler = [];
-
-  void generetorIndex() {
-    indexler.clear();
-    while (indexler.length < 4) {
-      int number = Random().nextInt(4);
-      if (indexler.contains(number) == false) {
-        indexler.add(number);
-      }
+  void lightColor() {
+    if (Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex]
+            .correction ==
+        1) {
+      colour = const Color.fromARGB(255, 47, 106, 49).withGreen(220);
+      isButtonActive = false;
+      textFieldActive = 1;
+      ColourBorder = Color.fromARGB(255, 40, 185, 45);
+    } else if (Kategoriler.kategoriler[widget.KategoriIndex]
+            .kelimeListesi[gezenIndex].correction ==
+        2) {
+      colour = const Color.fromARGB(255, 198, 56, 45).withRed(170);
+      isButtonActive = false;
+      textFieldActive = 1;
+      ColourBorder = Colors.red;
+    } else if (Kategoriler.kategoriler[widget.KategoriIndex]
+            .kelimeListesi[gezenIndex].correction ==
+        0) {
+      colour = colour;
+      isButtonActive = true;
+      ColourBorder = Colors.yellow.shade600;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'Learning Words',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              setState(() {
+                Kategoriler.kategoriler[secilenIndex].oyunlar[3];
+                Navigator.pop(context);
+              });
+            },
+            icon: const Icon(Icons.arrow_back_ios_new)),
+        backgroundColor: const Color.fromRGBO(96, 114, 116, 1),
+        title: const Text('Find The Word'),
+        
+      ),
+      body: Container(
+       
+        padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
+        constraints: const BoxConstraints.expand(),
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              _stepIndicator(),
+              Expanded(child: SizedBox()),
               Expanded(
-                  flex: 10,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Expanded(
-                          flex: 40,
-                          child: MyContainer(
-                            
-                            onpress: () =>
-                                onTapFunc(resault[indexler[0]], (newColor) {
-                              setState(() {
-                                getcolor = newColor;
-                                if (count == dictinory.length) {
-                                 // showDialogs();
-                                 Kategoriler.kategoriler[widget.gelenIndex].oyunlar[4]=true;
-                                 DosyaIslem.writeToFile();
-                                 Navigator.pop(context);
-                                }
-                              });
-                            }),
-                            renk: getcolor,
-                            child: Text(
-                              '${dictinory[resault[indexler[0]]].ingilizce}',
-                              style: const TextStyle(color: Colors.black,fontSize: 30),
-                            ),
-                          )),
-                      Expanded(flex: 1, child: SizedBox()),
-                      Expanded(
-                          flex: 40,
-                          child: MyContainer(
-                            onpress: () =>
-                                onTapFunc(resault[indexler[1]], (newColor) {
-                              setState(() {
-                                getcolor2 = newColor;
-                                if (count == dictinory.length) {
-                                  //showDialogs();
-                                  Kategoriler.kategoriler[widget.gelenIndex].oyunlar[4]=true;
-                                  DosyaIslem.writeToFile();
-                                  Navigator.pop(context);
-                                }
-                              });
-                            }),
-                            renk: getcolor2,
-                            child: Text(
-                              style: const TextStyle(color: Colors.black,fontSize: 30),
-                              '${dictinory[resault[indexler[1]]].ingilizce}',
-                            ),
-                          )),
-                    ],
-                  )),
-              Expanded(
+                flex: 7,
+                child: Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          print('going back');
+                          goBack();
+                          
+                          returnEnglish();
+                          returnTurkish();
+                          colour = Colors.white.withOpacity(0);
+                          lightColor();
+                          isVisible();
+                          shrinkIndicatortwo();
+                        });
+                      },
+                      icon: const Icon(Icons.arrow_back_ios_new),
+                      color: backArrayColor,
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: Container(
+                        width: 280.0,
+                        height: 300.0,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.scaleDown,
+                            image: AssetImage(imagePath =
+                                "assets/images/${Kategoriler.kategoriler[widget.KategoriIndex].kelimeListesi[gezenIndex].ingilizce}.jpg"),
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(23.0)),
+                          color: Colors.white,
+                          border: Border.all(color: ColourBorder),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          print('going forward');
+                          goForward();
+                          returnEnglish();
+                          returnTurkish();
+                          colour = Colors.white.withOpacity(0);
+                          lightColor();
+                          isVisible();
+                          shrinkIndicator();
+                        });
+                      },
+                      icon: const Icon(Icons.arrow_forward_ios),
+                      color: forwardArrayColor,
+                    ),
+                  ],
+                ),
+              ),
+              const Expanded(
                 flex: 1,
-                child: Center(
-                  child: Text(
-                    '${dictinory[resault[0]].turkce}',
-                    style: TextStyle(fontSize: 20),
+                child: SizedBox(
+                  height: 1.0,
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  returnTurkish(),
+                  style: const TextStyle(
+                    fontSize: 32.0,
+                    
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
               Expanded(
-                  flex: 10,
-                  child: Row(
-                    children: [
-                      Expanded(
-                          flex: 40,
-                          child: MyContainer(
-                            onpress: () =>
-                                onTapFunc(resault[indexler[2]], (newColor) {
-                              setState(() {
-                                getcolor3 = newColor;
-                                if (count == dictinory.length) {
-                                  //showDialogs();
-                                  Kategoriler.kategoriler[widget.gelenIndex].oyunlar[4]=true;
-                                  DosyaIslem.writeToFile();
-                                  Navigator.pop(context);
-                                }
-                              });
-                            }),
-                            renk: getcolor3,
-                            child: Text(
-                              style: const TextStyle(color: Colors.black,fontSize: 30),
-                              '${dictinory[resault[indexler[2]]].ingilizce}',
-                            ),
-                          )),
-                      Expanded(flex: 1, child: SizedBox()),
-                      Expanded(
-                          flex: 40,
-                          child: MyContainer(
-                            onpress: () =>
-                                onTapFunc(resault[indexler[3]], (newColor) {
-                              setState(() {
-                                getcolor4 = newColor;
-                                if (count == dictinory.length) {
-                                  //showDialogs();
-                                  Kategoriler.kategoriler[widget.gelenIndex].oyunlar[4]=true;
-                                  DosyaIslem.writeToFile();
-                                  Navigator.pop(context);
-                                }
-                              });
-                            }),
-                            renk: getcolor4,
-                            child: Text(
-                              
-                              style: 
-                              const TextStyle(
-                                color: Colors.black,fontSize: 30),
-                              
-                              '${dictinory[resault[indexler[3]]].ingilizce}',
-                            ),
-                          )),
-                    ],
-                  )),
+                flex: 2,
+                child: Text(
+                  returnEnglish(),
+                  style: TextStyle(
+                    color: colour,
+                    fontSize: 32.0,
+                  ),
+                ),
+              ),
+              const Expanded(
+                flex: 1,
+                child: SizedBox(
+                  height: 1.0,
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: TextField(
+                  onTapOutside: (event) {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
+                  cursorWidth: 5.0,
+                  controller: _textController,
+                  cursorColor: const Color.fromRGBO(96, 114, 116, 1),
+                  decoration: InputDecoration(
+                    errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red)),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 58, 70, 71),
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    labelText: 'Enter your answer',
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _textController.clear();
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.close,
+                        color: Color.fromARGB(255, 54, 64, 65),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: MaterialButton(
+                  disabledColor: const Color.fromRGBO(222, 208, 182, 1),
+                  onPressed: isButtonActive
+                      ? () {
+                          setState(() {
+                            userInput = _textController.text;
+                            _textController.clear();
+                            checkIt();
+                            isButtonActive = false;
+                          });
+                        }
+                      : null,
+                  height: 40.0,
+                  minWidth: 140.0,
+                  color: const Color.fromRGBO(178, 165, 155, 1),
+                  child: const Text(
+                    'Check',
+                    style: TextStyle(color: Colors.white, fontSize: 25.0),
+                  ),
+                ),
+              ),
+              const Expanded(
+                flex: 1,
+                child: SizedBox(
+                  height: 2.0,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 50, right: 50),
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                decoration: const BoxDecoration(
+                  color: Color.fromRGBO(142, 142, 142, 0.782),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(10.0),
+                  ),
+                ),
+                child: Row(
+                  children: scoreKeeper,
+                ),
+              )
             ],
-          )),
-    );
-  }
-}
-
-class MyContainer extends StatelessWidget {
-  final Widget? child;
-  final Color renk;
-  final Function()? onpress;
-  MyContainer({this.renk = Colors.white, this.child, this.onpress});
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onpress,
-      child: Container(
-        alignment: Alignment.center,
-        child: child,
-        margin: EdgeInsets.all(30),
-        decoration:
-            BoxDecoration(borderRadius: BorderRadius.circular(10), color: renk),
+          ),
+        ),
       ),
     );
   }
