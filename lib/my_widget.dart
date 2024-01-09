@@ -55,8 +55,10 @@ class _MyWidgetState extends State<MyWidget> {
                 width: 150,
                 margin: const EdgeInsets.all(8.0),
                 child: Text(
+                  
                   widget.liste[index].text,
                   textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.black),
                 ),
               ),
             ),
