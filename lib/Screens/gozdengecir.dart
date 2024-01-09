@@ -26,17 +26,32 @@ class stateGozdenGecir extends State<GozdenGecir> {
       child: Scaffold(
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
                 child: ListView.builder(
                           itemCount: kelimeler.length,
                           itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(kelimeler[index].ingilizce),
-                  subtitle: Text(kelimeler[index].turkce),
-                );
+                            return Card(
+                              margin: EdgeInsets.all(10),
+                              shape:  StadiumBorder(
+                                
+  side: BorderSide(
+    color: Colors.green,
+    width: 4.0,
+  ),
+),
+                              child: 
+                 ListTile(
+                  
+                  title: Center(child: Text(kelimeler[index].ingilizce,style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20),)),
+                  subtitle: Center(child: Text(kelimeler[index].turkce,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 20),)),
+                ),
+                
+                            );
+                            
                           }),
+                          
               ),
             /*  ContainerWidget(
                   text: "Gözden Geçir:"),
