@@ -101,8 +101,9 @@ class _AppThemeState extends State<AppTheme> {
                   child: Padding(
                     padding:  EdgeInsets.fromLTRB(25.0, 10.0,0,0),
                     child: Text(themeAppText,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    
                     style: TextStyle(color: dividerColor,
+                                     fontWeight: FontWeight.bold,
                     fontSize: 20.0),),
                     
                   ),
