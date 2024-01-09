@@ -204,7 +204,8 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                 Text(
                   fillListtr(),
                   style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w400),
+                    
+                      fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 Container(
                   margin: const EdgeInsets.only(
@@ -234,8 +235,9 @@ class stateKelimeBilgisi extends State<KelimeBilgisi> {
                             children: [
                               Text(fillListeng(),
                                   style: const TextStyle(
+                                    color: Colors.black,
                                       fontSize: 25,
-                                      fontWeight: FontWeight.w500)),
+                                      fontWeight: FontWeight.w400)),
                             ],
                           )),
                     ],
